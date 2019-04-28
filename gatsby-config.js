@@ -1,11 +1,19 @@
+const dotenv = require('dotenv');
+
+if(process.env.ENVIRONMENT !== 'production') {
+  dotenv.config();
+}
+
+const { spaceId, accessToken } = process.env;
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
-    author: `Kyle Mathews`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    title: `Complete Blog with Contentful`,
+    author: `Aeon B`,
+    description: `A complete blog demonstrating what Gatsby and Contentful can do.`,
+    siteUrl: `https://gatsby.contentful.blog.com`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `aeon_b_avinash`,
     },
   },
   plugins: [
@@ -74,5 +82,14 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    `gatsby-transformer-remark`,
+    `@contentful/gatsby-transformer-contentful-richtext`,
+    {
+      resolve: "gatsby-source-contentful",
+      options: {
+        spaceId,
+        accessToken
+      }
+    }
   ],
 }
